@@ -45,4 +45,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+    public function owned_rooms()
+    {
+        return $this->hasMany(Room::class, 'admin_id', 'id');
+    }
+    public function participated_rooms()
+    {
+        return $this->belongsToMany(Room::class, 'participants', 'participant_id', 'room_id')->withPivot('user_role');
+    }
 }
