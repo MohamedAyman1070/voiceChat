@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->uuid('id')->primary()->autoIncrement();
+            $table->uuid('id')->primary();
             $table->string('text');
             $table->uuid('user_id');
             $table->uuid('room_id');
