@@ -13,7 +13,7 @@ class Message extends Model
         'user_id',
         'room_id'
     ];
-
+    protected $keyType = 'string';
     public function Room()
     {
         return $this->belongsTo(Room::class);

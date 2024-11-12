@@ -17,6 +17,4 @@ trait HasUuid
             $model->uuid = (string) str()->uuid();
         });
     }
-
-    public $keyType = 'string';
 }

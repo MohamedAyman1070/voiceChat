@@ -16,7 +16,7 @@ class Room extends Model
     {
         return $this->hasMany(Message::class);
     }
-
+    protected $keyType = 'string';
 
     public function admin()
     {
