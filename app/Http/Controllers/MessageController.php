@@ -32,7 +32,6 @@ class MessageController extends Controller
             'user_id' => Auth::id(),
         ]);
         Broadcast(new MessageController($message));
-        return redirect()->back();
     }
 
     /**
