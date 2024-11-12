@@ -11,5 +11,5 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 
 Broadcast::channel('message.{room_id}', function (User $user, $room_id) {
     // if null do not broadcast
-    return Room::find($room_id)->participants->where('id', $user->id)->first();
+    return Room::find($room_id)->participants->where('participant_id', $user->id)->first();
 });

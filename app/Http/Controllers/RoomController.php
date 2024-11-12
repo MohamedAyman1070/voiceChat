@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class RoomController extends Controller
 {
@@ -60,6 +61,7 @@ class RoomController extends Controller
             'title' => 'required|min:5',
         ]);
         $room = Room::find($id)->frist();
+        Gate::authorize('can-update-room', $room);
         $room->update($data);
     }
 
@@ -68,6 +70,8 @@ class RoomController extends Controller
      */
     public function destroy(string $id)
     {
-        Room::find($id)->destroy();
+        $room = Room::find($id);
+        Gate::authorize('can-delete-room', $room);
+        $room->destroy();
     }
 }

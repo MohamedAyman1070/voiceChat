@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
@@ -14,10 +15,9 @@ class MessageController extends Controller
      */
     public function index($room_id)
     {
+        Room::find($room_id)->participants()->updateExistingPivote(Auth::id(), ['displayed_at' => now()]);
         return view('', Message::latest()->where('room_id', $room_id)->get());
     }
-
-
 
     /**
      * Store a newly created resource in storage.
