@@ -16,7 +16,7 @@ class MessageController extends Controller
     public function index($room_id)
     {
         Room::find($room_id)->participants()->updateExistingPivote(Auth::id(), ['displayed_at' => now()]);
-        return view('', Message::latest()->where('room_id', $room_id)->get());
+        return view('', ['messages' => Message::latest()->where('room_id', $room_id)->get()]);
     }
 
     /**
@@ -32,6 +32,7 @@ class MessageController extends Controller
             'user_id' => Auth::id(),
         ]);
         Broadcast(new MessageController($message));
+        return redirect()->back();
     }
 
     /**
