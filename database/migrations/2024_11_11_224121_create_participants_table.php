@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('participant_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('room_id')->constrained('rooms')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->uuid('room_id');
+            $table->uuid('participant_id');
+            $table->foreign('participant_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->enum('user_role', ['participant', 'guest'])->default('guest');
             $table->timestamps();
         });

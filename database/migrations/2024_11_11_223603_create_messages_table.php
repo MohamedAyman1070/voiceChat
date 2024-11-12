@@ -14,10 +14,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary()->autoIncrement();
             $table->string('text');
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignIdFor(Room::class)->constrained()->onDelete('cascade');
+            $table->uuid('user_id');
+            $table->uuid('room_id');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }
