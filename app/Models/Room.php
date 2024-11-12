@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
+    use HasUuid;
     public $fillable = [
         'title',
         'admin_id',
@@ -14,12 +16,7 @@ class Room extends Model
     {
         return $this->hasMany(Message::class);
     }
-    public function getRouteKeyName()
-    {
-        return 'uuid';
-    }
 
-    public $keyType = 'string';
 
     public function admin()
     {
