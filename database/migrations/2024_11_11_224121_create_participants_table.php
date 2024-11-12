@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreign('participant_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->enum('user_role', ['participant', 'guest'])->default('guest');
+            $table->dateTime('displayed_at')->default(now());
             $table->timestamps();
         });
     }
